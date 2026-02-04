@@ -258,4 +258,4 @@ All models inherit from a common `BaseModel` abstract class that defines a consi
 
 ---
 
-**Authors:** Jacopo Parretti VR536104, Cesare Fraccaroli V4533061
+**Authors:** Jacopo Parretti VR536104, Cesare Fraccaroli VR533061
