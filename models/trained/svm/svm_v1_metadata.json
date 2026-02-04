@@ -1,0 +1,51 @@
+{
+  "model_name": "SVM",
+  "hyperparameters": {
+    "C": 10.0,
+    "kernel": "rbf",
+    "gamma": "scale",
+    "degree": 3,
+    "class_weight": "balanced",
+    "probability": true,
+    "cache_size": 2000,
+    "max_iter": -1,
+    "random_state": 42
+  },
+  "training_history": {
+    "train_metrics": {
+      "accuracy": 0.8615099045795992
+    },
+    "val_metrics": {
+      "accuracy": 0.8348221536462563,
+      "precision_macro": 0.812621484960214,
+      "precision_weighted": 0.8384446221442501,
+      "recall_macro": 0.8208106884016024,
+      "recall_weighted": 0.8348221536462563,
+      "f1_macro": 0.8161027092940039,
+      "f1_weighted": 0.8361805359302391
+    },
+    "test_metrics": {},
+    "cv_scores": {
+      "scores": [
+        0.8336668696887961,
+        0.8308535630383712,
+        0.8322457147829113,
+        0.8302154934887903,
+        0.8327967748484585
+      ],
+      "mean": 0.8319556831694654,
+      "std": 0.0012619541799367938,
+      "folds": 5
+    },
+    "training_time": 6588.17111,
+    "created_at": "2026-02-04T15:49:15.007163",
+    "last_trained": "2026-02-04T17:39:03.178315"
+  },
+  "classes": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e"
+  ]
+}
