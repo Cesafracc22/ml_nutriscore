@@ -131,7 +131,7 @@ def main():
             'mean_test_score': mean_test,
             'std_test_score': std_test,
             'overfit_gap': gap,
-            'is_overfitting': bool(gap > 0.05),
+            'is_overfitting': bool(gap > 0.08),
             'rank_test_score': int(cv_results['rank_test_score'][i]),
             'confusion_matrix': cm,
         }
