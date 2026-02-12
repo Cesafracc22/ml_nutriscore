@@ -102,7 +102,7 @@ def main():
         X_test = pd.read_csv(data_dir / 'X_test.csv')
         y_test = pd.read_csv(data_dir / 'y_test.csv').values.ravel()
 
-        non_numeric_cols = X_test.select_dtypes(include=['object']).columns.tolist()
+        non_numeric_cols = X_test.select_dtypes(include=['object','string']).columns.tolist()
         if non_numeric_cols:
             X_test = X_test.select_dtypes(include=['number'])
 

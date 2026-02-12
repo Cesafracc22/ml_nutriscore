@@ -50,7 +50,7 @@ class BaseModel(ABC):
         y_train: Union[np.ndarray, pd.Series],
         X_val: Optional[Union[np.ndarray, pd.DataFrame]] = None,
         y_val: Optional[Union[np.ndarray, pd.Series]] = None,
-        cv_folds: int = 5,
+        # cv_folds: int = 5,
         verbose: bool = True
     ) -> Dict[str, float]:
         if self.model is None:
@@ -59,44 +59,44 @@ class BaseModel(ABC):
         start_time = datetime.now()
 
         # Perform cross-validation before training on full dataset
-        if cv_folds > 1:
-            skf = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
-            cv_scores = []
+        # if cv_folds > 1:
+        #     skf = StratifiedKFold(n_splits=cv_folds, shuffle=True, random_state=42)
+        #     cv_scores = []
 
-            fold_iterator = tqdm(
-                enumerate(skf.split(X_train, y_train), 1),
-                total=cv_folds,
-                desc="Cross-validation",
-                disable=not verbose,
-                bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt}'
-            )
+        #     fold_iterator = tqdm(
+        #         enumerate(skf.split(X_train, y_train), 1),
+        #         total=cv_folds,
+        #         desc="Cross-validation",
+        #         disable=not verbose,
+        #         bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt}'
+        #     )
 
-            for _, (train_idx, val_idx) in fold_iterator:
-                # Create fresh model for this fold
-                cv_model = self._build_model()
+        #     for _, (train_idx, val_idx) in fold_iterator:
+        #         # Create fresh model for this fold
+        #         cv_model = self._build_model()
 
-                X_fold_train = X_train.iloc[train_idx] if hasattr(X_train, 'iloc') else X_train[train_idx]
-                y_fold_train = y_train[train_idx]
-                X_fold_val = X_train.iloc[val_idx] if hasattr(X_train, 'iloc') else X_train[val_idx]
-                y_fold_val = y_train[val_idx]
+        #         X_fold_train = X_train.iloc[train_idx] if hasattr(X_train, 'iloc') else X_train[train_idx]
+        #         y_fold_train = y_train[train_idx]
+        #         X_fold_val = X_train.iloc[val_idx] if hasattr(X_train, 'iloc') else X_train[val_idx]
+        #         y_fold_val = y_train[val_idx]
 
-                cv_model.fit(X_fold_train, y_fold_train)
-                fold_score = cv_model.score(X_fold_val, y_fold_val)
-                cv_scores.append(fold_score)
+        #         cv_model.fit(X_fold_train, y_fold_train)
+        #         fold_score = cv_model.score(X_fold_val, y_fold_val)
+        #         cv_scores.append(fold_score)
 
-            cv_scores = np.array(cv_scores)
-            cv_mean = cv_scores.mean()
-            cv_std = cv_scores.std()
+        #     cv_scores = np.array(cv_scores)
+        #     cv_mean = cv_scores.mean()
+        #     cv_std = cv_scores.std()
 
-            self.training_history['cv_scores'] = {
-                'scores': cv_scores.tolist(),
-                'mean': float(cv_mean),
-                'std': float(cv_std),
-                'folds': cv_folds
-            }
+        #     self.training_history['cv_scores'] = {
+        #         'scores': cv_scores.tolist(),
+        #         'mean': float(cv_mean),
+        #         'std': float(cv_std),
+        #         'folds': cv_folds
+        #     }
 
-            if verbose:
-                print(f"CV accuracy: {cv_mean:.4f} ± {cv_std:.4f}")
+        #     if verbose:
+        #         print(f"CV accuracy: {cv_mean:.4f} ± {cv_std:.4f}")
 
         if verbose:
             with tqdm(total=1, desc="Training model", bar_format='{desc}: {bar}| [{elapsed}]', disable=not verbose) as pbar:
