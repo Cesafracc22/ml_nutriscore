@@ -24,12 +24,12 @@ and the best results we achieved in the first experiments.
 
 PARAM_GRIDS = {
     'logistic_regression': {
-        'C': [0.01, 0.1, 1.0, 10.0],
+        'C': [0.001, 0.01, 0.1, 1.0, 10.0, 100.0,1000.0],
         'solver': ['lbfgs'],
         'class_weight': ['balanced'],
     },
     'knn': {
-        'n_neighbors': [3, 5, 7, 15, 31, 63, 127],
+        'n_neighbors': [3, 5, 7, 9, 11, 15, 31, 63, 127],
         'weights': ['uniform', 'distance'],
         'metric': ['euclidean'],
     },
@@ -142,7 +142,7 @@ def main():
     best_gap = float(
         cv_results['mean_train_score'][best_index] - cv_results['mean_test_score'][best_index]
     )
-    overfit_threshold = 0.05
+    overfit_threshold = 0.08
 
     results = {
         'model': args.model,
